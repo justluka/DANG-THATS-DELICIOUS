@@ -1,0 +1,303 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"items",
+				"itemsFiltered"
+			],
+			[
+				"co",
+				"contain"
+			],
+			[
+				"cl",
+				"classList"
+			],
+			[
+				"fullNa",
+				"fullNames"
+			],
+			[
+				"hea",
+				"header\tTag"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "doctype html\nhtml\n  head\n    title= `${title} | ${h.siteName}`\n    link(rel='stylesheet', href='/dist/style.css')\n    link(rel=\"shortcut icon\" type=\"image/png\" href=\"/images/icons/doughnut.png\")\n    meta(name=\"fviewport\" content=\"width=device-width, initial-scale=1\")\n  body\n    block header\n      header.top\n        nav.nav\n          .nav__section.nav__section--pages\n            li.nav__item\n              a.nav__link.nav__link--logo(href=\"/\")\n                != h.icon('logo')\n            each item in h.menu\n              li.nav__item\n                a.nav__link(href=item.slug, class=(currentPath.startsWith(item.slug) ? 'nav__link--active' : ''))\n                  != h.icon(item.icon)\n                  span #{item.title}\n          .nav__section.nav__section--search\n            .search\n              input.search__input(type=\"text\" placeholder=\"Coffee, beer...\" name=\"search\")\n              .search__results\n          .nav__section.nav__section--user\n            if user\n              li.nav__item: a.nav__link(href=\"/hearts\", class=(currentPath.startsWith('/hearts') ? 'nav__link--active' : ''))\n                != h.icon('heart')\n                span.heart-count #{user.hearts && user.hearts.length}\n              li.nav__item: a.nav__link(href=\"/logout\", class=(currentPath.startsWith('/logout') ? 'nav__link--active' : ''))\n                != h.icon('logout')\n                span Logout\n              li.nav__item: a.nav__link(href=\"/account\", class=(currentPath.startsWith('/account') ? 'nav__link--active' : ''))\n                img.avatar(src=user.gravatar + 'd=retro')\n            else\n              li.nav__item: a.nav__link(href=\"/register\", class=(currentPath.startsWith('/register') ? 'nav__link--active' : '')) Register\n              li.nav__item: a.nav__link(href=\"/login\", class=(currentPath.startsWith('/login') ? 'nav__link--active' : '')) Log In\n\n    block messages\n      if locals.flashes\n        .inner\n          .flash-messages\n            - const categories = Object.keys(locals.flashes)\n            each category in categories\n              each message in flashes[category]\n                .flash(class=`flash--${category}`)\n                  p.flash__text!= message\n                  button.flash__remove(onClick=\"this.parentElement.remove()\") &times;\n    .content\n      block content\n\n    block scripts\n      script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)\n      script(src=\"/dist/App.bundle.js\")\n",
+			"file": "layout.pug",
+			"file_size": 2481,
+			"file_write_time": 131407026380000000,
+			"settings":
+			{
+				"buffer_size": 2482,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 354.0,
+		"last_filter": "insta",
+		"selected_items":
+		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: In",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: Ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package cOntrol: In",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Preferences: Package Control Settings – User"
+			]
+		],
+		"width": 496.0
+	},
+	"console":
+	{
+		"height": 253.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/lukanew/Desktop/nodeProject"
+	],
+	"file_history":
+	[
+		"/Users/lukanew/Desktop/nodeProject/node_modules/.bin/jade",
+		"/Users/lukanew/Desktop/es6modules/index.html",
+		"/Users/lukanew/Desktop/es6modules/src/config.js",
+		"/Users/lukanew/Desktop/es6modules/app.js",
+		"/Users/lukanew/Desktop/es6modules/webpack.config.js",
+		"/Users/lukanew/Desktop/es6modules/package.json",
+		"/Users/lukanew/Desktop/code.js",
+		"/Users/lukanew/Library/Application Support/Sublime Text 3/Packages/User/Package Control Messages",
+		"/Users/lukanew/Library/Application Support/Sublime Text 3/Packages/User/Package Control.sublime-settings",
+		"/Users/lukanew/Desktop/package.json",
+		"/Users/lukanew/Desktop/.eslintrc.js",
+		"/Users/lukanew/Desktop/Module 3 - Sanatize.html",
+		"/Users/lukanew/Desktop/ProjectEs6.sublime-project",
+		"/Users/lukanew/Desktop/Module 4-strings.html",
+		"/Users/lukanew/Desktop/Module 5- Intro.html",
+		"/Users/lukanew/Desktop/Excercise.html",
+		"/Users/lukanew/Desktop/Tagged-Template-dictionary.html",
+		"/Users/lukanew/Desktop/Exercise1.html",
+		"/Users/lukanew/Desktop/Module2-1.html",
+		"/Users/lukanew/Desktop/module 3-3.html",
+		"/Users/lukanew/Desktop/Module 2-2.html",
+		"/Users/lukanew/Desktop/Ejecicio1.html",
+		"/Users/lukanew/Desktop/Excersice1.html",
+		"/Users/lukanew/Desktop/Ejercicio2.html",
+		"/Users/lukanew/Desktop/Ejercicio3.html",
+		"/Users/lukanew/Desktop/TemporalDeadZone.html",
+		"/Users/lukanew/Desktop/ArrowFunctions.html",
+		"/Users/lukanew/Desktop/ArrowFunctionsExamples.html",
+		"/Users/lukanew/Desktop/ArrowFunctionAndThis.html",
+		"/Users/lukanew/Desktop/WhenNoUseArrowFunctions.html",
+		"/Users/lukanew/Desktop/DefaultArguments.html",
+		"/Users/lukanew/Library/Application Support/Sublime Text 3/Packages/User/hola.js",
+		"/Users/lukanew/Library/Application Support/Sublime Text 3/Packages/User/index.html"
+	],
+	"find":
+	{
+		"height": 76.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "layout.pug",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2482,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								211,
+								211
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 87.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 37.0
+	},
+	"input":
+	{
+		"height": 75.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "untitled.sublime-project",
+	"replace":
+	{
+		"height": 70.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"layout",
+				"views/layout.pug"
+			],
+			[
+				"j",
+				"node_modules/.bin/jade"
+			],
+			[
+				"package",
+				"package.json"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 224.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
