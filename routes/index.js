@@ -12,4 +12,6 @@ router.get('/', (req, res) => {
 router.get('/reverse/:name',(req,res)=>{
    res.send(req.params);
 });
+
+//someone was here from MAcOS
 module.exports = router;
