@@ -10,15 +10,15 @@ router.get('/stores', catchErrors(storeController.getStores));
 router.get('/add', authController.isLoggedIn, storeController.addStore);
 
 router.post('/add',
-  storeController.upload,
-  catchErrors(storeController.resize),
-  catchErrors(storeController.createStore)
+	storeController.upload,
+	catchErrors(storeController.resize),
+	catchErrors(storeController.createStore)
 );
 
 router.post('/add/:id',
-  storeController.upload,
-  catchErrors(storeController.resize),
-  catchErrors(storeController.updateStore)
+	storeController.upload,
+	catchErrors(storeController.resize),
+	catchErrors(storeController.updateStore)
 );
 
 router.get('/stores/:id/edit', catchErrors(storeController.editStore));
@@ -35,9 +35,9 @@ router.get('/register', userController.registerForm);
 // 2. register the user
 // 3. we need to log them in
 router.post('/register',
-  userController.validateRegister,
-  userController.register,
-  authController.login
+	userController.validateRegister,
+	userController.register,
+	authController.login
 );
 
 router.get('/logout', authController.logout);
