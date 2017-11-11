@@ -10,15 +10,15 @@ router.get('/stores', catchErrors(storeController.getStores));
 router.get('/add', storeController.addStore);
 
 router.post('/add',
-	storeController.upload,
-	catchErrors(storeController.resize),
-	catchErrors(storeController.createStore)
+  storeController.upload,
+  catchErrors(storeController.resize),
+  catchErrors(storeController.createStore)
 );
 
 router.post('/add/:id',
-	storeController.upload,
-	catchErrors(storeController.resize),
-	catchErrors(storeController.updateStore)
+  storeController.upload,
+  catchErrors(storeController.resize),
+  catchErrors(storeController.updateStore)
 );
 
 router.get('/stores/:id/edit', catchErrors(storeController.editStore));
@@ -30,6 +30,13 @@ router.get('/tags/:tag', catchErrors(storeController.getStoresByTag));
 router.get('/login', userController.loginForm);
 router.get('/register', userController.registerForm);
 
-router.post('/register', userController.validateRegister);
+// 1. Validate the registration data
+// 2. register the user
+// 3. we need to log them in
+router.post('/register',
+  userController.validateRegister,
+  userController.register,
+  authController.login
+);
 
 module.exports = router;
