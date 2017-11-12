@@ -40,7 +40,7 @@ const storeSchema = new mongoose.Schema({
   }
 }, {
   toJSON: { virtuals: true },
-  toObject: { virtuals: true },
+  toOjbect: { virtuals: true },
 });
 
 // Define our indexes

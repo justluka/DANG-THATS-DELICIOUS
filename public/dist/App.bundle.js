@@ -74,21 +74,21 @@
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 function autocomplete(input, latInput, lngInput) {
-	if (!input) return; // skip this fn from running if there is not input on the page
-	var dropdown = new google.maps.places.Autocomplete(input);
+  if (!input) return; // skip this fn from running if there is not input on the page
+  var dropdown = new google.maps.places.Autocomplete(input);
 
-	dropdown.addListener('place_changed', function () {
-		var place = dropdown.getPlace();
-		latInput.value = place.geometry.location.lat();
-		lngInput.value = place.geometry.location.lng();
-	});
-	// if someone hits enter on the address field, don't submit the form
-	input.on('keydown', function (e) {
-		if (e.keyCode === 13) e.preventDefault();
-	});
+  dropdown.addListener('place_changed', function () {
+    var place = dropdown.getPlace();
+    latInput.value = place.geometry.location.lat();
+    lngInput.value = place.geometry.location.lng();
+  });
+  // if someone hits enter on the address field, don't submit the form
+  input.on('keydown', function (e) {
+    if (e.keyCode === 13) e.preventDefault();
+  });
 }
 
 exports.default = autocomplete;
@@ -130,6 +130,8 @@ exports.$$ = $$;
 "use strict";
 
 
+__webpack_require__(12);
+
 var _bling = __webpack_require__(1);
 
 var _autocomplete = __webpack_require__(0);
@@ -150,7 +152,7 @@ var _heart2 = _interopRequireDefault(_heart);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _autocomplete2.default)((0, _bling.$)('#address'), (0, _bling.$)('#lat'), (0, _bling.$)('#lng')); //import '../sass/style.scss';
+(0, _autocomplete2.default)((0, _bling.$)('#address'), (0, _bling.$)('#lat'), (0, _bling.$)('#lng'));
 
 (0, _typeAhead2.default)((0, _bling.$)('.search'));
 
@@ -1014,7 +1016,7 @@ process.umask = function () {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _axios = __webpack_require__(13);
@@ -1028,79 +1030,79 @@ var _dompurify2 = _interopRequireDefault(_dompurify);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function searchResultsHTML(stores) {
-	return stores.map(function (store) {
-		return '\n      <a href="/store/' + store.slug + '" class="search__result">\n        <strong>' + store.name + '</strong>\n      </a>\n    ';
-	}).join('');
+  return stores.map(function (store) {
+    return '\n      <a href="/store/' + store.slug + '" class="search__result">\n        <strong>' + store.name + '</strong>\n      </a>\n    ';
+  }).join('');
 }
 
 function typeAhead(search) {
-	if (!search) return;
+  if (!search) return;
 
-	var searchInput = search.querySelector('input[name="search"]');
-	var searchResults = search.querySelector('.search__results');
+  var searchInput = search.querySelector('input[name="search"]');
+  var searchResults = search.querySelector('.search__results');
 
-	searchInput.on('input', function () {
-		var _this = this;
+  searchInput.on('input', function () {
+    var _this = this;
 
-		// if there is no value, quit it!
-		if (!this.value) {
-			searchResults.style.display = 'none';
-			return; // stop!
-		}
+    // if there is no value, quit it!
+    if (!this.value) {
+      searchResults.style.display = 'none';
+      return; // stop!
+    }
 
-		// show the search results!
-		searchResults.style.display = 'block';
+    // show the search results!
+    searchResults.style.display = 'block';
 
-		_axios2.default.get('/api/search?q=' + this.value).then(function (res) {
-			//console.log(res.data);
-			if (res.data.length) {
-				searchResults.innerHTML = _dompurify2.default.sanitize(searchResultsHTML(res.data));
-				return;
-			}
-			// tell them nothing came back
-			searchResults.innerHTML = _dompurify2.default.sanitize('<div class="search__result">No results for ' + _this.value + '</div>');
-		}).catch(function (err) {
-			console.error(err);
-		});
-	});
+    _axios2.default.get('/api/search?q=' + this.value).then(function (res) {
+      if (res.data.length) {
+        searchResults.innerHTML = _dompurify2.default.sanitize(searchResultsHTML(res.data));
+        return;
+      }
+      // tell them nothing came back
+      searchResults.innerHTML = _dompurify2.default.sanitize('<div class="search__result">No results for ' + _this.value + '</div>');
+    }).catch(function (err) {
+      console.error(err);
+    });
+  });
 
-	// handle keyboard inputs
-	searchInput.on('keyup', function (e) {
-		// if they aren't pressing up, down or enter, who cares!
-		if (![38, 40, 13].includes(e.keyCode)) {
-			return; // nah
-		}
-		var activeClass = 'search__result--active';
-		var current = search.querySelector('.' + activeClass);
-		var items = search.querySelectorAll('.search__result');
-		var next = void 0;
-		if (e.keyCode === 40 && current) {
-			next = current.nextElementSibling || items[0];
-		} else if (e.keyCode === 40) {
-			next = items[0];
-		} else if (e.keyCode === 38 && current) {
-			next = current.previousElementSibling || items[items.length - 1];
-		} else if (e.keyCode === 38) {
-			next = items[items.length - 1];
-		} else if (e.keyCode === 13 && current.href) {
-			window.location = current.href;
-			return;
-		}
-		if (current) {
-			current.classList.remove(activeClass);
-		}
-		next.classList.add(activeClass);
-	});
-
-	function newFunction() {
-		return console.log;
-	}
+  // handle keyboard inputs
+  searchInput.on('keyup', function (e) {
+    // if they aren't pressing up, down or enter, who cares!
+    if (![38, 40, 13].includes(e.keyCode)) {
+      return; // nah
+    }
+    var activeClass = 'search__result--active';
+    var current = search.querySelector('.' + activeClass);
+    var items = search.querySelectorAll('.search__result');
+    var next = void 0;
+    if (e.keyCode === 40 && current) {
+      next = current.nextElementSibling || items[0];
+    } else if (e.keyCode === 40) {
+      next = items[0];
+    } else if (e.keyCode === 38 && current) {
+      next = current.previousElementSibling || items[items.length - 1];
+    } else if (e.keyCode === 38) {
+      next = items[items.length - 1];
+    } else if (e.keyCode === 13 && current.href) {
+      window.location = current.href;
+      return;
+    }
+    if (current) {
+      current.classList.remove(activeClass);
+    }
+    next.classList.add(activeClass);
+  });
 }
 
 exports.default = typeAhead;
 
 /***/ }),
-/* 12 */,
+/* 12 */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Cannot find module 'node-sass'\n    at Function.Module._resolveFilename (module.js:527:15)\n    at Function.Module._load (module.js:476:23)\n    at Module.require (module.js:568:17)\n    at require (internal/module.js:11:18)\n    at Object.<anonymous> (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/sass-loader/lib/loader.js:3:14)\n    at Module._compile (module.js:624:30)\n    at Object.Module._extensions..js (module.js:635:10)\n    at Module.load (module.js:545:32)\n    at tryModuleLoad (module.js:508:12)\n    at Function.Module._load (module.js:500:3)\n    at Module.require (module.js:568:17)\n    at require (internal/module.js:11:18)\n    at loadLoader (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/loadLoader.js:13:17)\n    at iteratePitchingLoaders (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/LoaderRunner.js:165:10)\n    at /Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/LoaderRunner.js:173:18\n    at loadLoader (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/LoaderRunner.js:165:10)\n    at /Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/LoaderRunner.js:173:18\n    at loadLoader (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at runLoaders (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/LoaderRunner.js:362:2)\n    at NormalModule.doBuild (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/webpack/lib/NormalModule.js:180:15)\n    at Compilation.buildModule (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/webpack/lib/Compilation.js:142:10)\n    at moduleFactory.create (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/webpack/lib/Compilation.js:424:9)\n    at /Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/webpack/lib/NormalModuleFactory.js:242:4\n    at /Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/webpack/lib/NormalModuleFactory.js:93:13\n    at /Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/tapable/lib/Tapable.js:268:11\n    at /Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/webpack/lib/NormalModule.js:141:35\n    at /Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/LoaderRunner.js:364:11\n    at /Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/LoaderRunner.js:170:18\n    at loadLoader (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/loadLoader.js:27:11)\n    at iteratePitchingLoaders (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/LoaderRunner.js:165:10)\n    at /Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/LoaderRunner.js:173:18\n    at loadLoader (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/LoaderRunner.js:165:10)\n    at /Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/LoaderRunner.js:173:18\n    at loadLoader (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at runLoaders (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/loader-runner/lib/LoaderRunner.js:362:2)\n    at NormalModule.doBuild (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/webpack/lib/NormalModule.js:180:15)\n    at Compilation.buildModule (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/webpack/lib/Compilation.js:142:10)\n    at moduleFactory.create (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/webpack/lib/Compilation.js:424:9)\n    at /Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/webpack/lib/NormalModuleFactory.js:242:4\n    at /Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/webpack/lib/NormalModuleFactory.js:93:13\n    at /Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/tapable/lib/Tapable.js:268:11\n    at NormalModuleFactory.params.normalModuleFactory.plugin (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/webpack/lib/CompatibilityPlugin.js:52:5)\n    at NormalModuleFactory.applyPluginsAsyncWaterfall (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/tapable/lib/Tapable.js:272:13)\n    at onDoneResolving (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/webpack/lib/NormalModuleFactory.js:68:11)\n    at onDoneResolving (/Users/lukanew/Desktop/DANG-THATS-DELICIOUS/node_modules/webpack/lib/NormalModuleFactory.js:189:6)\n    at _combinedTickCallback (internal/process/next_tick.js:131:7)\n    at process._tickCallback (internal/process/next_tick.js:180:9)");
+
+/***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2718,7 +2720,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _axios = __webpack_require__(13);
@@ -2730,21 +2732,21 @@ var _bling = __webpack_require__(1);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function ajaxHeart(e) {
-	var _this = this;
+  var _this = this;
 
-	e.preventDefault();
-	console.log('HEART ITTT!!!!!!!!!!!!!!!!');
-	console.log(this);
-	_axios2.default.post(this.action).then(function (res) {
-		var isHearted = _this.heart.classList.toggle('heart__button--hearted');
-		(0, _bling.$)('.heart-count').textContent = res.data.hearts.length;
-		if (isHearted) {
-			_this.heart.classList.add('heart__button--float');
-			setTimeout(function () {
-				return _this.heart.classList.remove('heart__button--float');
-			}, 2500);
-		}
-	}).catch(console.error);
+  e.preventDefault();
+  console.log('HEART ITTT!!!!!!!!!!!!!!!!');
+  console.log(this);
+  _axios2.default.post(this.action).then(function (res) {
+    var isHearted = _this.heart.classList.toggle('heart__button--hearted');
+    (0, _bling.$)('.heart-count').textContent = res.data.hearts.length;
+    if (isHearted) {
+      _this.heart.classList.add('heart__button--float');
+      setTimeout(function () {
+        return _this.heart.classList.remove('heart__button--float');
+      }, 2500);
+    }
+  }).catch(console.error);
 }
 
 exports.default = ajaxHeart;
@@ -2757,7 +2759,7 @@ exports.default = ajaxHeart;
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -2771,64 +2773,64 @@ var _bling = __webpack_require__(1);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapOptions = {
-	center: { lat: 43.2, lng: -79.8 },
-	zoom: 10
+  center: { lat: 43.2, lng: -79.8 },
+  zoom: 10
 };
 
 function loadPlaces(map) {
-	var lat = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 43.2;
-	var lng = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -79.8;
+  var lat = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 43.2;
+  var lng = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -79.8;
 
-	_axios2.default.get('/api/stores/near?lat=' + lat + '&lng=' + lng).then(function (res) {
-		var places = res.data;
-		if (!places.length) {
-			alert('no places found!');
-			return;
-		}
-		// create a bounds
-		var bounds = new google.maps.LatLngBounds();
-		var infoWindow = new google.maps.InfoWindow();
+  _axios2.default.get('/api/stores/near?lat=' + lat + '&lng=' + lng).then(function (res) {
+    var places = res.data;
+    if (!places.length) {
+      alert('no places found!');
+      return;
+    }
+    // create a bounds
+    var bounds = new google.maps.LatLngBounds();
+    var infoWindow = new google.maps.InfoWindow();
 
-		var markers = places.map(function (place) {
-			var _place$location$coord = _slicedToArray(place.location.coordinates, 2),
-			    placeLng = _place$location$coord[0],
-			    placeLat = _place$location$coord[1];
+    var markers = places.map(function (place) {
+      var _place$location$coord = _slicedToArray(place.location.coordinates, 2),
+          placeLng = _place$location$coord[0],
+          placeLat = _place$location$coord[1];
 
-			var position = { lat: placeLat, lng: placeLng };
-			bounds.extend(position);
-			var marker = new google.maps.Marker({ map: map, position: position });
-			marker.place = place;
-			return marker;
-		});
+      var position = { lat: placeLat, lng: placeLng };
+      bounds.extend(position);
+      var marker = new google.maps.Marker({ map: map, position: position });
+      marker.place = place;
+      return marker;
+    });
 
-		// when someone clicks on a marker, show the details of that place
-		markers.forEach(function (marker) {
-			return marker.addListener('click', function () {
-				console.log(this.place);
-				var html = '\n          <div class="popup">\n            <a href="/store/' + this.place.slug + '">\n              <img src="/uploads/' + (this.place.photo || 'store.png') + '" alt="' + this.place.name + '" />\n              <p>' + this.place.name + ' - ' + this.place.location.address + '</p>\n            </a>\n          </div>\n        ';
-				infoWindow.setContent(html);
-				infoWindow.open(map, this);
-			});
-		});
+    // when someone clicks on a marker, show the details of that place
+    markers.forEach(function (marker) {
+      return marker.addListener('click', function () {
+        console.log(this.place);
+        var html = '\n          <div class="popup">\n            <a href="/store/' + this.place.slug + '">\n              <img src="/uploads/' + (this.place.photo || 'store.png') + '" alt="' + this.place.name + '" />\n              <p>' + this.place.name + ' - ' + this.place.location.address + '</p>\n            </a>\n          </div>\n        ';
+        infoWindow.setContent(html);
+        infoWindow.open(map, this);
+      });
+    });
 
-		// then zoom the map to fit all the markers perfectly
-		map.setCenter(bounds.getCenter());
-		map.fitBounds(bounds);
-	});
+    // then zoom the map to fit all the markers perfectly
+    map.setCenter(bounds.getCenter());
+    map.fitBounds(bounds);
+  });
 }
 
 function makeMap(mapDiv) {
-	if (!mapDiv) return;
-	// make our map
-	var map = new google.maps.Map(mapDiv, mapOptions);
-	loadPlaces(map);
+  if (!mapDiv) return;
+  // make our map
+  var map = new google.maps.Map(mapDiv, mapOptions);
+  loadPlaces(map);
 
-	var input = (0, _bling.$)('[name="geolocate"]');
-	var autocomplete = new google.maps.places.Autocomplete(input);
-	autocomplete.addListener('place_changed', function () {
-		var place = autocomplete.getPlace();
-		loadPlaces(map, place.geometry.location.lat(), place.geometry.location.lng());
-	});
+  var input = (0, _bling.$)('[name="geolocate"]');
+  var autocomplete = new google.maps.places.Autocomplete(input);
+  autocomplete.addListener('place_changed', function () {
+    var place = autocomplete.getPlace();
+    loadPlaces(map, place.geometry.location.lat(), place.geometry.location.lng());
+  });
 }
 
 exports.default = makeMap;
