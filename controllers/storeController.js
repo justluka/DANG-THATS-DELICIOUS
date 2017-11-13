@@ -154,7 +154,7 @@ exports.heartStore = async (req, res) => {
       { [operator]: { hearts: req.params.id } },
       { new: true }
     );
-  res.json(user);
+  //res.json(user);
 };
 
 exports.getHearts = async (req, res) => {
